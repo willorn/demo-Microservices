@@ -1,18 +1,15 @@
 server:
-  port: 8071
+  port: 8072
 spring:
   application:
-    name: item-service
+    name: cart-service
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://${hm.db.host}:3306/hm-item?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${hm.db.host}:3306/hm-cart?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ${hm.db.pw}
-  cloud:
-    nacos:
-      server-addr: 192.168.42.138:8848
 mybatis-plus:
   configuration:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
@@ -22,7 +19,7 @@ mybatis-plus:
       id-type: auto
 logging:
   level:
-    com.hmall.itemservice: debug
+    com.hmall.cart: debug
   pattern:
     dateformat: HH:mm:ss:SSS
   file:
@@ -30,8 +27,8 @@ logging:
 knife4j:
   enable: true
   openapi:
-    title: 黑马商城接口文档
-    description: "黑马商城接口文档"
+    title: 购物车接口文档
+    description: "购物车接口文档"
     email: zhanghuyi@itcast.cn
     concat: 虎哥
     url: https://www.itcast.cn
@@ -41,4 +38,4 @@ knife4j:
         group-name: default
         api-rule: package
         api-rule-resources:
-          - com.hamll.itemservice.controller
+          - com.hamll.cart.controller
