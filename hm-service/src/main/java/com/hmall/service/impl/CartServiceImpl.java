@@ -50,6 +50,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
             return;
         }
         // 2.2.不存在，判断是否超过购物车数量
+        // 校验购物车数量是否超限
         checkCartsFull(userId);
 
         // 3.新增购物车条目
@@ -88,6 +89,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
             return;
         }
         // 3.转为 id 到 item的map
+        // 转为 id -> ItemDTO 的映射
         Map<Long, ItemDTO> itemMap = items.stream().collect(Collectors.toMap(ItemDTO::getId, Function.identity()));
         // 4.写入vo
         for (CartVO v : vos) {

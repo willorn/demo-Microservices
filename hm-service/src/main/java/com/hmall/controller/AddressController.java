@@ -25,6 +25,7 @@ import java.util.List;
  * </p>
  *
  */
+/* 收货地址接口 */
 @RestController
 @RequestMapping("/addresses")
 @RequiredArgsConstructor

@@ -17,9 +17,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 1.获取请求头中的 token
         String token = request.getHeader("authorization");
-        // 2.校验token
+        // 2. 校验并解析 token，获取用户ID
         Long userId = jwtTool.parseToken(token);
-        // 3.存入上下文
+        // 3.存入上下文: 将用户ID写入上下文，便于后续获取
         UserContext.setUser(userId);
         // 4.放行
         return true;

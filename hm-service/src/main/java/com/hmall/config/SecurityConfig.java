@@ -26,6 +26,7 @@ public class SecurityConfig {
                         properties.getLocation(),
                         properties.getPassword().toCharArray());
         //读取钥匙对
+        // 从密钥库读取钥匙对
         return keyStoreKeyFactory.getKeyPair(
                 properties.getAlias(),
                 properties.getPassword().toCharArray());

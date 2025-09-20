@@ -27,7 +27,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 1.添加拦截器
+        // 1.添加拦截器: 登录拦截器
         LoginInterceptor loginInterceptor = new LoginInterceptor(jwtTool);
         InterceptorRegistration registration = registry.addInterceptor(loginInterceptor);
         // 2.配置拦截路径
