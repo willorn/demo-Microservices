@@ -4,6 +4,8 @@ package com.hmall.common.utils;
  * @author tianyi
  */
 public class UserContext {
+    
+    // 异步任务最佳实践：阿里巴巴的  https://github.com/alibaba/transmittable-thread-local
     private static final ThreadLocal<Long> tl = new ThreadLocal<>();
 
     /**
