@@ -1,9 +1,11 @@
 package com.hmall.cart.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmall.cart.domain.dto.CartFormDTO;
+import com.hmall.cart.domain.dto.ItemDTO;
 import com.hmall.cart.domain.po.Cart;
 import com.hmall.cart.domain.vo.CartVO;
 import com.hmall.cart.mapper.CartMapper;
@@ -13,7 +15,13 @@ import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.CollUtils;
 import com.hmall.common.utils.UserContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +41,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
 
-    private final IItemService itemService;
+    private final RestTemplate restTemplate;
+    private final DiscoveryClient discoveryClient;
+
+    // private final IItemService itemService;
 
     @Override
     public void addItem2Cart(CartFormDTO cartFormDTO) {
@@ -41,7 +52,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         Long userId = UserContext.getUser();
 
         // 2.判断是否已经存在
-        if(checkItemExists(cartFormDTO.getItemId(), userId)){
+        if (checkItemExists(cartFormDTO.getItemId(), userId)) {
             // 2.1.存在，则更新数量
             baseMapper.updateNum(cartFormDTO.getItemId(), userId);
             return;
@@ -81,7 +92,25 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         // 1.获取商品id
         Set<Long> itemIds = vos.stream().map(CartVO::getItemId).collect(Collectors.toSet());
         // 2.查询商品
-        List<ItemDTO> items = itemService.queryItemByIds(itemIds);
+        List<ServiceInstance> instances = discoveryClient.getInstances("item-service");
+        if (CollUtils.isEmpty(instances)) {
+            return;
+        }
+        ServiceInstance serviceInstance = instances.get(RandomUtil.randomInt(instances.size()));
+        ResponseEntity<List<ItemDTO>> responseEntity = restTemplate.exchange(
+            serviceInstance.getUri() + "/items?ids={ids}",
+            HttpMethod.GET,
+            null,
+            new ParameterizedTypeReference<List<ItemDTO>>() {
+            },
+            CollUtils.join(itemIds, ",")
+        );
+
+        if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+            return;
+        }
+        List<ItemDTO> items = responseEntity.getBody();
+
         if (CollUtils.isEmpty(items)) {
             return;
         }
@@ -91,7 +120,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         // 4.写入vo
         for (CartVO v : vos) {
             ItemDTO item = itemMap.get(v.getItemId());
-            if (item == null) {
+            if (item==null) {
                 continue;
             }
             v.setNewPrice(item.getPrice());
@@ -105,8 +134,8 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         // 1.构建删除条件，userId和itemId
         QueryWrapper<Cart> queryWrapper = new QueryWrapper<Cart>();
         queryWrapper.lambda()
-                .eq(Cart::getUserId, UserContext.getUser())
-                .in(Cart::getItemId, itemIds);
+            .eq(Cart::getUserId, UserContext.getUser())
+            .in(Cart::getItemId, itemIds);
         // 2.删除
         remove(queryWrapper);
     }
@@ -120,9 +149,9 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
 
     private boolean checkItemExists(Long itemId, Long userId) {
         long count = lambdaQuery()
-                .eq(Cart::getUserId, userId)
-                .eq(Cart::getItemId, itemId)
-                .count();
+            .eq(Cart::getUserId, userId)
+            .eq(Cart::getItemId, itemId)
+            .count();
         return count > 0;
     }
 }
