@@ -2,10 +2,10 @@ package com.hmall.itemservice.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hmall.api.dto.ItemDTO;
 import com.hmall.common.domain.PageDTO;
 import com.hmall.common.domain.PageQuery;
 import com.hmall.common.utils.BeanUtils;
-import com.hmall.itemservice.domain.dto.ItemDTO;
 import com.hmall.itemservice.domain.dto.OrderDetailDTO;
 import com.hmall.itemservice.domain.po.Item;
 import com.hmall.itemservice.service.IItemService;
