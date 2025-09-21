@@ -1,5 +1,6 @@
 package com.hmall.user.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,12 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+    /**
+     * // 也可以：本地开发兜底：如果密钥库不存在，生成内存RSA密钥对，避免启动失败
+     * @param properties
+     * @return
+     */
     @Bean
     public KeyPair keyPair(JwtProperties properties){
         Assert.notNull(properties.getLocation(), "hm.jwt.location 未配置");

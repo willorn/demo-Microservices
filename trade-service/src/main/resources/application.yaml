@@ -41,4 +41,4 @@ knife4j:
         group-name: default
         api-rule: package
         api-rule-resources:
-          - com.hamll.trade.controller
+          - com.hmall.trade.controller

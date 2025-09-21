@@ -41,4 +41,4 @@ knife4j:
         group-name: default
         api-rule: package
         api-rule-resources:
-          - com.hamll.itemservice.controller
+          - com.hmall.itemservice.controller
