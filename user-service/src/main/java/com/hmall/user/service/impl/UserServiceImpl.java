@@ -5,24 +5,26 @@ import com.hmall.common.exception.BadRequestException;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.exception.ForbiddenException;
 import com.hmall.common.utils.UserContext;
-import com.hmall.config.JwtProperties;
+import com.hmall.user.config.JwtProperties;
 import com.hmall.enums.UserStatus;
-import com.hmall.mapper.UserMapper;
+import com.hmall.user.mapper.UserMapper;
 import com.hmall.user.domain.LoginFormDTO;
 import com.hmall.user.domain.UserLoginVO;
 import com.hmall.user.service.IUserService;
-import com.hmall.utils.JwtTool;
+import com.hmall.user.utils.JwtTool;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import com.hmall.user.domain.User;
 
 /**
  * <p>
  * 用户表 服务实现类
  * </p>
  *
+ * @author tianyi
  */
 @Slf4j
 @Service

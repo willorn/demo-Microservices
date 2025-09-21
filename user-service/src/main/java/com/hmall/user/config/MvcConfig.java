@@ -1,8 +1,8 @@
 package com.hmall.user.config;
 
 import cn.hutool.core.collection.CollUtil;
-import com.hmall.interceptor.LoginInterceptor;
-import com.hmall.utils.JwtTool;
+import com.hmall.user.interceptor.LoginInterceptor;
+import com.hmall.user.utils.JwtTool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
