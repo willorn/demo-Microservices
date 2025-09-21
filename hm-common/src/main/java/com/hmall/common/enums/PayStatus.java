@@ -1,4 +1,4 @@
-package com.hmall.enums;
+package com.hmall.common.enums;
 
 import lombok.Getter;
 

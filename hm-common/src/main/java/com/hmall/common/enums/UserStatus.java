@@ -1,4 +1,4 @@
-package com.hmall.enums;
+package com.hmall.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.hmall.common.exception.BadRequestException;

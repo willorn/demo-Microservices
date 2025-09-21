@@ -1,7 +1,7 @@
 package com.hmall.cart.controller;
 
 
-import com.hmall.api.dto.CartFormDTO;
+import com.hmall.api.dto.cart.CartFormDTO;
 import com.hmall.cart.domain.po.Cart;
 import com.hmall.cart.domain.vo.CartVO;
 import com.hmall.cart.service.ICartService;

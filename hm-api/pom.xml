@@ -23,6 +23,11 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!-- validation for @Validated/@NotNull on @ConfigurationProperties -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <!--openFeign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
