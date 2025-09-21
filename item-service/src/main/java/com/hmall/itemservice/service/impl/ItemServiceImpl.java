@@ -2,9 +2,9 @@ package com.hmall.itemservice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmall.api.domain.dto.ItemDTO;
+import com.hmall.api.domain.dto.OrderDetailDTO;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.utils.BeanUtils;
-import com.hmall.itemservice.domain.dto.OrderDetailDTO;
 import com.hmall.itemservice.domain.po.Item;
 import com.hmall.itemservice.mapper.ItemMapper;
 import com.hmall.itemservice.service.IItemService;

@@ -6,6 +6,7 @@ import com.hmall.api.client.ItemClient;
 import com.hmall.api.domain.dto.ItemDTO;
 import com.hmall.api.domain.dto.OrderDetailDTO;
 import com.hmall.api.domain.dto.OrderFormDTO;
+import com.hmall.api.domain.po.Order;
 import com.hmall.common.exception.BadRequestException;
 import com.hmall.common.utils.UserContext;
 import com.hmall.trade.domain.po.OrderDetail;
@@ -13,7 +14,6 @@ import com.hmall.trade.mapper.OrderMapper;
 import com.hmall.trade.service.IOrderDetailService;
 import com.hmall.trade.service.IOrderService;
 import lombok.RequiredArgsConstructor;
-import com.hmall.trade.domain.po.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

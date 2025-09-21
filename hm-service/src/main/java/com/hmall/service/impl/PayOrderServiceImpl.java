@@ -3,16 +3,15 @@ package com.hmall.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hmall.api.client.TradeClient;
+import com.hmall.api.domain.dto.PayApplyDTO;
+import com.hmall.api.domain.dto.PayOrderFormDTO;
+import com.hmall.common.enums.PayStatus;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.UserContext;
-import com.hmall.api.domain.dto.PayApplyDTO;
-import com.hmall.api.domain.dto.PayOrderFormDTO;
-import com.hmall.domain.po.Order;
 import com.hmall.domain.po.PayOrder;
-import com.hmall.common.enums.PayStatus;
 import com.hmall.mapper.PayOrderMapper;
-import com.hmall.service.IOrderService;
 import com.hmall.service.IPayOrderService;
 import com.hmall.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,8 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
 
     private final IUserService userService;
 
-    private final IOrderService orderService;
+    // 远程订单服务客户端（微服务架构，强依赖）
+    private final TradeClient tradeClient;
 
     @Override
     public String applyPayOrder(PayApplyDTO applyDTO) {
@@ -61,12 +61,8 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
         if (!success) {
             throw new BizIllegalException("交易已支付或关闭！");
         }
-        // 5.修改订单状态
-        Order order = new Order();
-        order.setId(po.getBizOrderNo());
-        order.setStatus(2);
-        order.setPayTime(LocalDateTime.now());
-        orderService.updateById(order);
+        // 5.修改订单状态（微服务）：远程标记
+        tradeClient.markOrderPaySuccess(po.getBizOrderNo());
     }
 
     public boolean markPayOrderSuccess(Long id, LocalDateTime successTime) {

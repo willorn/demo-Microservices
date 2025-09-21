@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.List;
 
-@FeignClient("item-service")
+@FeignClient(name = "item-service", contextId = "itemClient")
 public interface ItemClient {
     
     @GetMapping("/items")
     List<ItemDTO> queryByIds(@RequestParam("ids") Collection<Long> ids);
     
-    @PutMapping("/stock/deduct")
+    @PutMapping("/items/stock/deduct")
     void deductStock(@RequestBody List<OrderDetailDTO> detailDTOS);
 }

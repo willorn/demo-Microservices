@@ -23,6 +23,12 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!-- mybatis-plus annotations for entities placed in this module -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
         <!-- validation for @Validated/@NotNull on @ConfigurationProperties -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
