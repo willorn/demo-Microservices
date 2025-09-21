@@ -1,4 +1,4 @@
-package com.hmall.domain.vo;
+package com.hmall.api.domain.dto.user;
 
 import lombok.Data;
 

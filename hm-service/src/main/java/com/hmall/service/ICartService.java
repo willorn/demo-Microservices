@@ -1,9 +1,9 @@
 package com.hmall.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hmall.domain.dto.CartFormDTO;
+import com.hmall.api.domain.dto.CartFormDTO;
 import com.hmall.domain.po.Cart;
-import com.hmall.domain.vo.CartVO;
+import com.hmall.api.domain.vo.CartVO;
 
 import java.util.Collection;
 import java.util.List;
