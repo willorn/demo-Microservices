@@ -1,4 +1,4 @@
-package com.hmall.controller;
+package com.hmall.user.controller;
 
 
 import com.hmall.common.exception.BadRequestException;
@@ -6,8 +6,8 @@ import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.CollUtils;
 import com.hmall.common.utils.UserContext;
 import com.hmall.api.domain.dto.AddressDTO;
-import com.hmall.domain.po.Address;
-import com.hmall.service.IAddressService;
+import com.hmall.api.domain.po.Address;
+import com.hmall.user.service.IAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,6 +39,9 @@ public class AddressController {
     public AddressDTO findAddressById(@ApiParam("地址id") @PathVariable("addressId") Long id) {
         // 1.根据id查询
         Address address = addressService.getById(id);
+        if (address == null) {
+            throw new BadRequestException("地址不存在");
+        }
         // 2.判断当前用户
         Long userId = UserContext.getUser();
         if(!address.getUserId().equals(userId)){
