@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>hmall</artifactId>
         <groupId>com.heima</groupId>
+        <artifactId>hmall</artifactId>
         <version>1.0.0</version>
     </parent>
     <groupId>com.hmall</groupId>
-    <artifactId>cart-service</artifactId>
+    <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cart-service</name>
-    <description>cart-service</description>
+    <name>user-service</name>
+    <description>user-service</description>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -21,6 +21,14 @@
             <groupId>com.heima</groupId>
             <artifactId>hm-common</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-rsa</artifactId>
         </dependency>
         <!--web-->
         <dependency>
@@ -51,7 +59,14 @@
             <artifactId>hm-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>hm-service</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
