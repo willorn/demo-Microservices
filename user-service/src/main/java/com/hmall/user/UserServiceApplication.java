@@ -4,7 +4,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@MapperScan("com.hmall.user.mapper")
+@MapperScan(basePackages = "com.hmall.user.mapper",
+        markerInterface = com.baomidou.mybatisplus.core.mapper.BaseMapper.class)
 @SpringBootApplication
 public class UserServiceApplication {
 
