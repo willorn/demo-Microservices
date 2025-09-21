@@ -39,7 +39,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private final CartClient cartClient;
     private final IOrderDetailService detailService;
 
-    @Override2
+    @Override
     @Transactional
     public Long createOrder(OrderFormDTO orderFormDTO) {
         // 1.订单数据
