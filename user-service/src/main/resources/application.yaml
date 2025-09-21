@@ -42,3 +42,12 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.hamll.user.controller
+hm:
+  jwt:
+    location: classpath:hmall.jks
+    alias: hmall
+    password: hmall123
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /users/login

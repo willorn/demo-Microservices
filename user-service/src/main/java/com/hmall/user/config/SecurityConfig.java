@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
+import org.springframework.util.Assert;
 
 import java.security.KeyPair;
 
@@ -20,6 +21,9 @@ public class SecurityConfig {
 
     @Bean
     public KeyPair keyPair(JwtProperties properties){
+        Assert.notNull(properties.getLocation(), "hm.jwt.location 未配置");
+        Assert.hasText(properties.getPassword(), "hm.jwt.password 未配置");
+        Assert.hasText(properties.getAlias(), "hm.jwt.alias 未配置");
         // 获取秘钥工厂
         KeyStoreKeyFactory keyStoreKeyFactory =
                 new KeyStoreKeyFactory(
