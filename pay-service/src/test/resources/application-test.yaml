@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: pay-service
+  config:
+    # Override to avoid importing Nacos during tests
+    import: []
+  cloud:
+    nacos:
+      config:
+        enabled: false
+
+hm:
+  pay:
+    aliPayAppId: test-app-id
+    aliPayPrivateKey: test-private-key-1234567890
+    aliPayPublicKey: test-public-key-abcdefg
+
