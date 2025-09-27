@@ -1,4 +1,12 @@
 hm:
   db:
     host: 192.168.42.138 # 修改为你自己的虚拟机IP地址
+    database: hm-trade
+    username: root
     pw: 123 # 修改为docker中的MySQL密码
+  swagger:
+    package: com.hmall.trade.controller
+knife4j:
+  openapi:
+    title: 交易相关接口文档
+    description: 交易相关接口文档
