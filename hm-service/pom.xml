@@ -56,6 +56,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-rsa</artifactId>
         </dependency>
+        <!-- Nacos Config for centralized configuration -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.hmall</groupId>
             <artifactId>hm-api</artifactId>

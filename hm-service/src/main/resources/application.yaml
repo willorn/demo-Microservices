@@ -5,6 +5,13 @@ spring:
     name: hm-service
   profiles:
     active: dev
+  # Import shared configuration from Nacos
+  config:
+    import:
+      - nacos:common-config.yaml
+  cloud:
+    nacos:
+      server-addr: 192.168.42.138:8848
   datasource:
     url: jdbc:mysql://${hm.db.host}:3306/hmall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -5,28 +5,13 @@ spring:
     name: user-service
   profiles:
     active: dev
-  datasource:
-    url: jdbc:mysql://${hm.db.host}:3306/hm-user?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: ${hm.db.pw}
+  # Import shared configuration from Nacos
+  config:
+    import:
+      - nacos:common-config.yaml
   cloud:
     nacos:
       server-addr: 192.168.42.138:8848
-mybatis-plus:
-  configuration:
-    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
-  global-config:
-    db-config:
-      update-strategy: not_null
-      id-type: auto
-logging:
-  level:
-    com.hmall.user: debug
-  pattern:
-    dateformat: HH:mm:ss:SSS
-  file:
-    path: "logs/${spring.application.name}"
 knife4j:
   enable: true
   openapi:

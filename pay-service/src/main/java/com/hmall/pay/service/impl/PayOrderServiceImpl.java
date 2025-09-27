@@ -7,6 +7,7 @@ import com.hmall.api.client.OrderClient;
 import com.hmall.api.client.UserClient;
 import com.hmall.api.domain.dto.PayApplyDTO;
 import com.hmall.api.domain.dto.PayOrderFormDTO;
+import com.hmall.api.domain.po.Order;
 import com.hmall.common.enums.PayStatus;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.utils.BeanUtils;
@@ -64,7 +65,7 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
         order.setId(po.getBizOrderNo());
         order.setStatus(2);
         order.setPayTime(LocalDateTime.now());
-        orderService.updateById(order);
+        // orderService.updateById(order);
     }
 
     public boolean markPayOrderSuccess(Long id, LocalDateTime successTime) {
