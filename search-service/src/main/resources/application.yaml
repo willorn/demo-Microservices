@@ -1,11 +1,10 @@
 server:
-  port: 8080
+  port: 8085
 spring:
   application:
-    name: hm-service
+    name: search-service
   profiles:
     active: dev
-  # Import shared configuration from Nacos
   config:
     import:
       - nacos:common-config.yaml
@@ -13,7 +12,7 @@ spring:
     nacos:
       server-addr: 192.168.42.138:8848
   datasource:
-    url: jdbc:mysql://${hm.db.host}:3306/hmall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${hm.db.host}:3306/hm-item?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ${hm.db.pw}
@@ -26,7 +25,7 @@ mybatis-plus:
       id-type: auto
 logging:
   level:
-    com.hmall: debug
+    com.hmall.search: debug
   pattern:
     dateformat: HH:mm:ss:SSS
   file:
@@ -34,8 +33,8 @@ logging:
 knife4j:
   enable: true
   openapi:
-    title: 黑马商城接口文档
-    description: "黑马商城接口文档"
+    title: 黑马商城搜索接口文档
+    description: "黑马商城搜索服务接口文档"
     email: zhanghuyi@itcast.cn
     concat: TTTTT
     url: https://www.itcast.cn
@@ -45,16 +44,4 @@ knife4j:
         group-name: default
         api-rule: package
         api-rule-resources:
-          - com.hmall.controller
-hm:
-  jwt:
-    location: classpath:hmall.jks
-    alias: hmall
-    password: hmall123
-    tokenTTL: 30m
-  auth:
-    excludePaths:
-      - /users/login
-      - /items/**
-      - /hi
-# keytool -genkeypair -alias hmall -keyalg RSA -keypass hmall123 -keystore hmall.jks -storepass hmall123
+          - com.hmall.search.controller
