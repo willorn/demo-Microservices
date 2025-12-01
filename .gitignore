@@ -37,6 +37,5 @@ mvnw
 .env
 application-local.yml
 application-local.properties
-*.jks
 *.p12
 *.keystore
